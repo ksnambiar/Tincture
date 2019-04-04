@@ -1,14 +1,15 @@
 let Block = require('../Block/Block')
 let _ = require("lodash")
+let {ValueTxn} = require('../Block/Transaction')
 class BlockChain{
     constructor(){
         this.chain=[this.addGenesisBlock()]
         //proof of work thing
-        this.difficulty=4
+        this.difficulty=2
         //txnPool
         this.PendingTxns=[]
         //proof of work : miner reward
-        this.mReward=2;
+        this.mReward=10;
     }
     addGenesisBlock(){
         return new Block(0,"0",0,"12/11/13",[],[],[],"gen_prof")
@@ -24,8 +25,31 @@ class BlockChain{
         
         this.PendingTxns.push(txn)
     }
+    minePendingTxns(sAddress){
+        let block = new Block(this.chain.length,"",0,new Date().getTime(),this.PendingTxns)
+        block.mineBlock(this.difficulty)
+        block.prevHash = this.chain[this.chain.length-1].currHash
+        this.chain.push(block)
+        this.PendingTxns= [
+            new ValueTxn(null,sAddress, this.mReward)
+        ]
+    }
     getLatestBlock(){
         return this.chain[this.chain.length-1]
+    }
+    getBalanceOfAddress(address){
+        let balance = 0;
+        for(const block of this.chain){
+            for(const trans of block.txns){
+                if(trans.from === address){
+                    balance -= trans.amount;
+                }
+                if(trans.to === address){
+                    balance += trans.amount;
+                }
+            }
+        }
+        return balance;
     }
     isChainValid(){
         for(let i=1;i<this.chain.length;++i){
@@ -34,6 +58,8 @@ class BlockChain{
             
             if(currBlock.currHash!==currBlock.calc_Hash().toString()){
                 console.log("1")
+                console.log(currBlock.currHash)
+                console.log(currBlock.calc_Hash().toString())
                 return false
             }
 
