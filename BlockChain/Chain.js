@@ -3,14 +3,26 @@ let _ = require("lodash")
 class BlockChain{
     constructor(){
         this.chain=[this.addGenesisBlock()]
+        //proof of work thing
+        this.difficulty=4
+        //txnPool
+        this.PendingTxns=[]
+        //proof of work : miner reward
+        this.mReward=2;
     }
     addGenesisBlock(){
         return new Block(0,"0",0,"12/11/13",[],[],[],"gen_prof")
     }
-    addBlock(block){
-        block.prevHash = this.getLatestBlock().currHash;
-        block.currHash=block.calc_Hash().toString()
-        this.chain.push(block);
+    // addBlock(block){
+    //     block.prevHash = this.getLatestBlock().currHash;
+    //     // block.currHash=block.calc_Hash().toString()
+    //     //proofof work
+    //     block.mineBlock(this.difficulty);
+    //     this.chain.push(block);
+    // }
+    createTransaction(txn){
+        
+        this.PendingTxns.push(txn)
     }
     getLatestBlock(){
         return this.chain[this.chain.length-1]
