@@ -29,17 +29,16 @@ class BlockChain{
     }else{
         if(!transaction.from){
             throw new Error('Transaction must include from and to address');
-
         }
     }
         if(!transaction.isValid()){
             throw new Error('Cannot add invalid transaction to chain');
         }
     
-        this.pendingTransactions.push(transaction);
+        this.PendingTxns.push(transaction);
     }
     minePendingTxns(sAddress){
-        let block = new Block(this.chain.length,"",0,new Date().getTime(),this.PendingTxns)
+        let block = new Block(this.chain.length,"",this.chain[this.chain.length-1].total_txn,new Date().getTime(),this.PendingTxns)
         block.mineBlock(this.difficulty)
         block.prevHash = this.chain[this.chain.length-1].currHash
         this.chain.push(block)
