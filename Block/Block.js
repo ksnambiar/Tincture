@@ -22,10 +22,19 @@ class Block{
         // Keep changing the nonce until the hash of our block starts with enough zero's.
         while (this.currHash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
           this.nonce++;
-          this.currHash = this.calc_Hash().toString();
+          this.currHash = this.calc_Hash().toString(); 
         }
           
         console.log("BLOCK MINED: " + this.currHash);
+    }
+    hasValidTransactions(){
+        for(const tx of this.txns){
+            if(!tx.isValid()){
+                return false;
+            }
+        }
+    
+        return true;
     }
 }
 

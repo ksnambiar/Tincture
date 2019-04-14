@@ -21,9 +21,22 @@ class BlockChain{
     //     block.mineBlock(this.difficulty);
     //     this.chain.push(block);
     // }
-    createTransaction(txn){
-        
-        this.PendingTxns.push(txn)
+    addTransaction(transaction){
+        if(transaction.type==="ValueTransfer" || transaction.type==="DataTransfer")
+        {if(!transaction.from || !transaction.to){
+            throw new Error('Transaction must include from and to address');
+        }
+    }else{
+        if(!transaction.from){
+            throw new Error('Transaction must include from and to address');
+
+        }
+    }
+        if(!transaction.isValid()){
+            throw new Error('Cannot add invalid transaction to chain');
+        }
+    
+        this.pendingTransactions.push(transaction);
     }
     minePendingTxns(sAddress){
         let block = new Block(this.chain.length,"",0,new Date().getTime(),this.PendingTxns)
@@ -74,7 +87,11 @@ class BlockChain{
             console.log("3")
             return false
         }
+        if (!currentBlock.hasValidTransactions()) {
+            return false;
+        }
         return true
     }
+
 }
 module.exports = BlockChain

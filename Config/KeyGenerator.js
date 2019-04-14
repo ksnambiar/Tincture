@@ -3,17 +3,13 @@ const fs = require('fs');
 let ec = new EC('secp256k1');
 
 const entry = (path="../configFiles/key.json")=>{
-    fs.readFile(path,(err,data)=>{
-        if(err){
     
     fs.writeFile(path,JSON.stringify(genKeyPair()),(err)=>{
         return err
     })
-        }else{
-            return JSON.parse(data)
-        }
-    })
 }
+// fs.readFile(path,(err,data)=>{
+//     if(err){
 
 function genKeyPair(){       
 const validFile={
@@ -35,5 +31,5 @@ validFile.pubKey.value=publicKey;
 validFile.pubKey.privkey.value=privateKey;
 return validFile
 }
-
+entry()
 module.exports = entry;
