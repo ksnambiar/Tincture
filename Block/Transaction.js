@@ -57,11 +57,19 @@ class DataTxn{
 }
 
 class DataStoreTxn{
-    constructor(ownerA,time,signat){
+    constructor(id,ownerA,time,signat){
+        this.id=id
         this.owner=ownerA;
         this.time=time
         this.signature = signat
         this.type="dataStore"
+    }
+    calculateHash(){
+        return SHA256(this.owner+this.time+this.signature)
+                .toString();
+    }
+    isValid(){
+       return true
     }
 }
 module.exports = {ValueTxn,DataTxn,DataStoreTxn}
