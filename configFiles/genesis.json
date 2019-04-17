@@ -1,0 +1,27 @@
+{
+    "genesis_time": "2018-11-10T04:00:00.961357009Z",
+    "chain_id": "Tincture-Net",
+    "consensus_params": {
+      "block_size_params": {
+        "max_bytes": "22020096",
+        "max_gas": "-1"
+      },
+      "evidence_params": {
+        "max_age": "10000000000"
+      }
+    },
+    "validators": [
+      {
+        "address":"",
+        "pubKey":{
+            "type":"Tincture/PubKeysecp256k1",
+            "value":"04e9d89fa438fe66e284261133082b83633763411115782edaf55aac1d9f3c5b5adf8fa146687faff332faef53cf836c3af94b165efcd19951b79dbc1acc926bf1",
+            "privKey":{
+            "type":"Tincture/PrivKeysecp256k1"
+            ,"value":"c701a2600321df4e7d9b9df94e384150b197c0950510132b1752df9b73ff2d7d"
+            }
+        }
+      }
+    ],
+    "app_hash": ""
+  }

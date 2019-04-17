@@ -2,7 +2,6 @@ let fs=require("fs");
 let bcip=require("./BlockChain/Chain");
 const vkeys=JSON.parse(fs.readFileSync("./configFiles/key.json"))
 let validator=JSON.parse(fs.readFileSync("./configFiles/key.json"))
-const txn_pool=new Array()
 const tincture = new bcip()
 const validateTxn = ()=>{
     if(tincture.PendingTxns.length!==0){
