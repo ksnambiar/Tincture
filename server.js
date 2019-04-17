@@ -3,7 +3,7 @@ let app = express()
 let r1 = require("./Routes/api/Route1");
 const bodyParser = require("body-parser")
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({extended:false}))
 app.get("/",(req,res)=>{
     res.status(200).json({message:"tincture api"})
 })

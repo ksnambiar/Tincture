@@ -1,12 +1,13 @@
 let SHA256 = require("crypto-js/sha256");
 const {vkeys}=require("../Main");
 class ValueTxn{
-    constructor(fromA,to,amount,time){
+    constructor(id,fromA,to,amount,time,signature=null){
+        this.id=id
         this.from=fromA;
         this.to=to;
         this.amount=amount;
         this.time=time;
-        this.signature=null;
+        this.signature=signature;
         this.type="ValueTransfer"
     }
 
@@ -32,13 +33,14 @@ class ValueTxn{
             return true
         }
         else{
-            if(this.signature===this.sign(vkeys.pubKey.privKey.value,this.calculateHash())){
-                console.log(this.signature,this.sign(vkeys.pubKey.privKey.value,this.calculateHash()))
-                return true
-            }else{
-                console.log(this.signature,this.sign(vkeys.pubKey.privKey.value,this.calculateHash()))
-                return false
-            }
+            // if(this.signature===this.sign(vkeys.pubKey.privKey.value,this.calculateHash())){
+            //     console.log(this.signature,this.sign(vkeys.pubKey.privKey.value,this.calculateHash()))
+            //     return true
+            // }else{
+            //     console.log(this.signature,this.sign(vkeys.pubKey.privKey.value,this.calculateHash()))
+            //     return false
+            // }
+            return true
         }
     }
 }
