@@ -1,4 +1,5 @@
 let fs=require("fs");
+let level = require("level")
 let bcip=require("./BlockChain/Chain");
 const vkeys=JSON.parse(fs.readFileSync("./configFiles/key.json"))
 let validator=JSON.parse(fs.readFileSync("./configFiles/key.json"))

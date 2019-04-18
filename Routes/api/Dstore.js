@@ -12,6 +12,11 @@ router.get("/",(req,res)=>{
 router.get("/state/:id",(req,res)=>{
     res.status(200).json({data:dataAccess(req.params.id)})
 })
+//creating a new store
+router.get("/state/newStore/:id",(req,res)=>{
+    let name = req.params.id
+
+}) 
 
 //adding data to personalised store
 router.post("/state/:id",(req,res)=>{
@@ -23,5 +28,6 @@ router.post("/state/:id",(req,res)=>{
     tincture.addTransaction(dstTxn);
     res.status(200).json({message:"data added to transaction list"})
     //TODO: use leveldb for storage
-}) 
+    
+})
 module.exports = router
