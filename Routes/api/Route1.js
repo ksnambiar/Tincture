@@ -27,7 +27,7 @@ router.get("/txnpool",(req,res)=>{
 })
 
 //submitting a transaction into the transaction pool
-router.post("/transaction",(req,res)=>{
+router.post("/transaction/",(req,res)=>{
 let data=req.body;
 let ret_obj={}
 ret_obj.time=new Date().getTime()
@@ -38,4 +38,5 @@ tincture.addTransaction(transaction)
 res.status(200).json({message:"transaction added successfully",
 data:ret_obj})
 })
+
 module.exports=router

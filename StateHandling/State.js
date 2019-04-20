@@ -1,11 +1,30 @@
-const level = require("level")
-const db = level("%HOME%/Tincture/State")
-let state;
+var db = require("../DB");
+let state={
+    euphony:{}
+} ;
 
-db.get("state",(err,val)=>{
-    state=JSON.parse(val)
-    console.log(state)
-})
+// db.get("state",(err,val)=>{
+//     if(err){
+//         let data={
+           
+//         }
+//         db.put("state",JSON.stringify(data),(err)=>{
+//             db.get("state",(err,val)=>{
+//                 state=JSON.parse(val)
+//             })
+//         })
+//     }else{
+//     state=JSON.parse(val)
+//     console.log(state)
+//     }
+// })
+
+
+const updateDB = ()=>{
+    db.put("state",JSON.stringify(state),(err)=>{
+        console.log(err)
+    });
+    }
 // db.put("state",state,(err)=>{
 //     console.log("some error")
 // })
@@ -32,7 +51,4 @@ db.get("state",(err,val)=>{
 //     console.log('Stream ended')
 //   })
 
-const updateDB = ()=>{
-    db.put("state",JSON.stringify(state));
-    }
 module.exports = {state,updateDB};

@@ -27,8 +27,8 @@ class BlockChain{
             throw new Error('Transaction must include from and to address');
         }
     }else{
-        if(!transaction.from){
-            throw new Error('Transaction must include from and to address');
+        if(!transaction.owner){
+            throw new Error('Transaction must include fromaddress');
         }
     }
         if(!transaction.isValid()){
